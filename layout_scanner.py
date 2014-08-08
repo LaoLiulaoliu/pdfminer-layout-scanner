@@ -24,12 +24,10 @@ def with_pdf (pdf_doc, fn, pdf_pwd, *args):
         fp = open(pdf_doc, 'rb')
         # create a parser object associated with the file object
         parser = PDFParser(fp)
-        # create a PDFDocument object that stores the document structure
-        doc = PDFDocument(parser)
+        # create a PDFDocument object that stores the document structure,
+        # supply the password
         # connect the parser and document objects
-        parser.set_document(doc)
-        # supply the password for initialization
-        doc.initialize(pdf_pwd)
+        doc = PDFDocument(parser, pdf_pwd)
 
         if doc.is_extractable:
             # apply the function and return the result
@@ -201,3 +199,7 @@ def _parse_pages (doc, images_folder):
 def get_pages (pdf_doc, pdf_pwd='', images_folder='/tmp'):
     """Process each of the pages in this pdf file and return a list of strings representing the text found in each page"""
     return with_pdf(pdf_doc, _parse_pages, pdf_pwd, *tuple([images_folder]))
+
+if __name__ == '__main__':
+    import sys
+    print ''.join( get_pages(sys.argv[1]) )
