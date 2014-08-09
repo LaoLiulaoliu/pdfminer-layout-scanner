@@ -105,6 +105,9 @@ def save_image (lt_image, page_number, images_folder):
                 file_name = ''.join([str(page_number), '_', lt_image.name, file_ext])
                 if write_file(images_folder, file_name, file_stream, flags='wb'):
                     result = file_name
+            else:
+                print 'Image is not jpeg,png,gif,bmp. Maybe it is pure data. Show the attributes: '
+                print lt_image.stream.attrs
     return result
 
 
