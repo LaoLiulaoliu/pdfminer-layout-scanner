@@ -106,7 +106,7 @@ def save_image (lt_image, page_number, images_folder):
                 if write_file(images_folder, file_name, file_stream, flags='wb'):
                     result = file_name
             else:
-                print 'Image is not jpeg,png,gif,bmp. Maybe it is pure data. Show the attributes: '
+                print 'Image is jbig2 encoded sth like data without any encapsulate format. Show the attributes: '
                 print lt_image.stream.attrs
     return result
 
